@@ -17,3 +17,13 @@ ssh() {
   sleep 60 && exit
   tmux rename-window "bash (exited ssh)"
 }
+
+export TERM=xterm-256color
+
+export LS_OPTIONS='--color=auto'
+eval "`dircolors`"
+alias ls='ls $LS_OPTIONS'
+
+export GREP_OPTIONS='--color=auto'
+alias grep='grep $GREP_OPTIONS'
+
