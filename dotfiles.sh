@@ -18,8 +18,10 @@ echo "...done"
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
 for file in $files; do
+    echo "Removing symlinks to $file in home directory."
+    unlink ~/$file	 
     echo "Moving any existing dotfiles from ~ to $olddir"
-    mv ~/$file ~/dotfiles_old/
+    cp -r ~/dotfiles/$file ~/dotfiles_old/$file.bak.$(date +%F_%R)
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~/$file
 done
