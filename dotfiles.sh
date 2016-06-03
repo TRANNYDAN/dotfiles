@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # dotfiles directory
-dir=~/dotfiles                    
+dir=$HOME/dotfiles                    
 
 # old dotfiles backup directory
-olddir=~/dotfiles_old             
+olddir=$HOME/dotfiles_old             
 
 # list of files/folders to symlink in homedir
 files=".bashrc .tmux.conf .tmux .profile"        
@@ -20,9 +20,14 @@ if [ "$(ls ~/ | grep dotfiles_old)" = "dotfiles_old" ]
 fi
 
 # change to the dotfiles directory
-echo -e "Changing to the $dir directory"
-cd $dir
-echo -e "...done \n"
+if [ "$(pwd)" = "$dir" ]
+  then
+    :
+  else
+    echo -e "Changing to the $dir directory"
+    cd $dir
+    echo -e "...done \n"
+fi
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
 for file in $files; do
