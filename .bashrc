@@ -11,11 +11,13 @@ fi
 # User specific aliases and functions
 
 ssh() {
-  tmux rename-window "$*"
-  command ssh "$@"
-  echo "Counting to 60"
-  sleep 60 && exit
-  tmux rename-window "bash (exited ssh)"
+    if [ "$(ps -p $(ps -p $$ -o ppid=) -o comm=)" = "tmux" ]; then
+        tmux rename-window "$(echo $* | cut -d . -f 1)"
+        command ssh "$@"
+        tmux set-window-option automatic-rename "on" 1>/dev/null
+    else
+        command ssh "$@"
+    fi
 }
 
 export TERM=xterm-256color
