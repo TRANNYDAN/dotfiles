@@ -35,4 +35,4 @@ alias ls='ls $LS_OPTIONS'
 
 export GREP_OPTIONS='--color=auto'
 alias grep='grep $GREP_OPTIONS'
-
+unset GREP_OPTIONS
